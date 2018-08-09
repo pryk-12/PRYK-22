@@ -1,0 +1,783 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BD_JSYSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CLIENTES">
+          <Key>
+            <PropertyRef Name="REFERENCIA" />
+          </Key>
+          <Property Name="REFERENCIA" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="100" />
+          <Property Name="ID_TIPO_IDENTIFICACION" Type="int" Nullable="false" />
+          <Property Name="NUMERO_IDENTIFICACION" Type="nvarchar" MaxLength="15" />
+          <Property Name="DIRECCION" Type="nvarchar(max)" />
+          <Property Name="TELEFONO" Type="nvarchar" MaxLength="15" />
+          <Property Name="CELULAR" Type="nvarchar" MaxLength="15" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="50" />
+          <Property Name="SUELDO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ESTADO" Type="nvarchar" MaxLength="1" />
+          <Property Name="CREADO_POR" Type="nvarchar" MaxLength="20" />
+          <Property Name="FECHA_CREADO" Type="datetime" />
+          <Property Name="DIRECCION_TRABAJO" Type="nvarchar(max)" />
+          <Property Name="NOMBRE_CONYUGUE" Type="nvarchar" MaxLength="100" />
+          <Property Name="TELEFONO_CONYUGUE" Type="nvarchar" MaxLength="15" />
+          <Property Name="CASA_PROPIA" Type="nvarchar" MaxLength="2" />
+          <Property Name="NOMBRE_REFERENCIA1" Type="nvarchar" MaxLength="100" />
+          <Property Name="DIRECCION_REFERENCIA1" Type="nvarchar(max)" />
+          <Property Name="TELEFONO_REFERENCIA1" Type="nvarchar" MaxLength="15" />
+          <Property Name="OBSERVACION_REFERENCIA1" Type="nvarchar(max)" />
+          <Property Name="NOMBRE_REFERENCIA2" Type="nvarchar" MaxLength="100" />
+          <Property Name="DIRECCION_REFERENCIA2" Type="nvarchar(max)" />
+          <Property Name="TELEFONO_REFERENCIA2" Type="nvarchar" MaxLength="15" />
+          <Property Name="OBSERVACION_REFERENCIA2" Type="nvarchar(max)" />
+          <Property Name="OBSERVACION" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CUADRES_DIARIOS">
+          <Key>
+            <PropertyRef Name="FECHA" />
+          </Key>
+          <Property Name="FECHA" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="VALOR_PAGADO" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VALOR_ANULADO" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VALOR_TOTAL" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VALOR_DESCUENTO" Type="numeric" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="DETALLES_CUOTAS">
+          <Key>
+            <PropertyRef Name="ID_FACTURA" />
+            <PropertyRef Name="NUMERO_CUOTA" />
+            <PropertyRef Name="FECHA" />
+            <PropertyRef Name="MONTO_CUOTA" />
+          </Key>
+          <Property Name="ID_FACTURA" Type="int" Nullable="false" />
+          <Property Name="NUMERO_CUOTA" Type="int" Nullable="false" />
+          <Property Name="FECHA" Type="date" Nullable="false" />
+          <Property Name="MONTO_CUOTA" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MONTO_PAGADO" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MONTO_PENDIENTE" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RE_CALCULADO" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="ID_EMPRESA" />
+          </Key>
+          <Property Name="ID_EMPRESA" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DIRECCION" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="ID_TIPO_IDENTIFICACION" Type="int" Nullable="false" />
+          <Property Name="NUMERO_IDENTIFICACION" Type="varchar" MaxLength="20" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="20" />
+          <Property Name="CELULAR" Type="varchar" MaxLength="20" />
+          <Property Name="FAX" Type="varchar" MaxLength="20" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="PAGINA_WEB" Type="varchar" MaxLength="50" />
+          <Property Name="ESLOGAN" Type="varchar" MaxLength="250" />
+          <Property Name="IMPRESORA" Type="varchar" MaxLength="100" />
+          <Property Name="LOGO" Type="image" />
+        </EntityType>
+        <EntityType Name="ENCABEZADO_CUOTAS">
+          <Key>
+            <PropertyRef Name="ID_FACTURA" />
+          </Key>
+          <Property Name="ID_FACTURA" Type="int" Nullable="false" />
+          <Property Name="MODO_CALCULO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CANTIADA_CUOTA" Type="int" Nullable="false" />
+          <Property Name="FECHA_PRIMERA_CUOTA" Type="date" />
+        </EntityType>
+        <EntityType Name="ESTADO_FACTURAS">
+          <Key>
+            <PropertyRef Name="ID_ESTADO" />
+          </Key>
+          <Property Name="ID_ESTADO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FACTURAS">
+          <Key>
+            <PropertyRef Name="ID_FACTURA" />
+          </Key>
+          <Property Name="ID_FACTURA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FECHA" Type="date" Nullable="false" />
+          <Property Name="REFERENCIA" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ID_COBRADOR" Type="int" Nullable="false" />
+          <Property Name="NUMERO_LOTERIA" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="MONTO_TOTAL" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MONTO_PAGADO" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MONTO_PENDIENTE" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ID_ESTADO" Type="int" Nullable="false" />
+          <Property Name="OBSERVACION" Type="varchar" MaxLength="1000" />
+          <Property Name="CREADO_POR" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="FECHA_CREADO" Type="date" Nullable="false" />
+          <Property Name="CAMBIO_ESTADO_POR" Type="varchar" MaxLength="50" />
+          <Property Name="FECHA_CAMBIO_ESTADO" Type="varchar" MaxLength="50" />
+          <Property Name="NOTA_CAMBIO_ESTADO" Type="varchar" MaxLength="500" />
+          <Property Name="GARANTIA1" Type="varchar" MaxLength="150" />
+          <Property Name="GARANTIA2" Type="varchar" MaxLength="150" />
+          <Property Name="GARANTIA3" Type="varchar" MaxLength="150" />
+          <Property Name="GARANTIA4" Type="varchar" MaxLength="150" />
+          <Property Name="GARANTIA5" Type="varchar" MaxLength="150" />
+          <Property Name="GARANTIA6" Type="varchar" MaxLength="150" />
+          <Property Name="GARANTIA7" Type="varchar" MaxLength="150" />
+          <Property Name="MONTO_DESCONTADO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RUTA" Type="varchar" MaxLength="10" />
+          <Property Name="FECHA_DESCUENTO" Type="date" />
+        </EntityType>
+        <EntityType Name="PANTALLAS">
+          <Key>
+            <PropertyRef Name="PANTALLA" />
+          </Key>
+          <Property Name="PANTALLA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ACCESO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERMISOS">
+          <Key>
+            <PropertyRef Name="USUARIO" />
+            <PropertyRef Name="PANTALLA" />
+          </Key>
+          <Property Name="USUARIO" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="PANTALLA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ACCESO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RECIBOS_COBRADOS">
+          <Key>
+            <PropertyRef Name="ID_RECIBO" />
+          </Key>
+          <Property Name="ID_RECIBO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_FACTURA" Type="int" Nullable="false" />
+          <Property Name="CUOTA_COBRADA" Type="int" Nullable="false" />
+          <Property Name="VALOR_CUOTA" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VALOR_PAGADO" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VALOR_PENDIENTE" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ESTADO" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="FECHA_CREADO" Type="date" Nullable="false" />
+          <Property Name="CREADO_POR" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CANTIDAD_CUOTAS" Type="int" Nullable="false" />
+          <Property Name="ANULADO_POR" Type="varchar" MaxLength="50" />
+          <Property Name="FECHA_ANULADO" Type="varchar" MaxLength="50" />
+          <Property Name="NOTA_ANULACION" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TIPOS_IDENTIFICACIONES">
+          <Key>
+            <PropertyRef Name="ID_TIPO_IDENTIFICACION" />
+          </Key>
+          <Property Name="ID_TIPO_IDENTIFICACION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="USUARIO" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="CLAVE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="SEXO" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="ESTADO" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CREADO_POR" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="FECHA_CREADO" Type="date" Nullable="false" />
+          <Property Name="TIPO" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Function Name="SP_LLENAR_COMBOBOX" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TABLA" Type="nvarchar" Mode="In" />
+          <Parameter Name="VALOR_MOSTRAR" Type="nvarchar" Mode="In" />
+          <Parameter Name="VALOR_CODIGO" Type="nvarchar" Mode="In" />
+          <Parameter Name="CONDICION" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="BD_JSYSModelStoreContainer">
+          <EntitySet Name="CLIENTES" EntityType="Self.CLIENTES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CUADRES_DIARIOS" EntityType="Self.CUADRES_DIARIOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETALLES_CUOTAS" EntityType="Self.DETALLES_CUOTAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ENCABEZADO_CUOTAS" EntityType="Self.ENCABEZADO_CUOTAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ESTADO_FACTURAS" EntityType="Self.ESTADO_FACTURAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FACTURAS" EntityType="Self.FACTURAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PANTALLAS" EntityType="Self.PANTALLAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERMISOS" EntityType="Self.PERMISOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RECIBOS_COBRADOS" EntityType="Self.RECIBOS_COBRADOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPOS_IDENTIFICACIONES" EntityType="Self.TIPOS_IDENTIFICACIONES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BD_JSYSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BD_JSYSEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="SP_ARTICULOS">
+            <Parameter Name="ID_ARTICULO" Mode="In" Type="Int32" />
+            <Parameter Name="REFERENCIA" Mode="In" Type="String" />
+            <Parameter Name="DESCRIPCION" Mode="In" Type="String" />
+            <Parameter Name="CANTIDAD" Mode="In" Type="Int32" />
+            <Parameter Name="PRECIO_COMPRA" Mode="In" Type="Decimal" />
+            <Parameter Name="PRECIO_VENTA1" Mode="In" Type="Decimal" />
+            <Parameter Name="PRECIO_VENTA2" Mode="In" Type="Decimal" />
+            <Parameter Name="PRECIO_VENTA3" Mode="In" Type="Decimal" />
+            <Parameter Name="APLICA_ITBIS" Mode="In" Type="String" />
+            <Parameter Name="ESTADO" Mode="In" Type="String" />
+            <Parameter Name="CREADO_POR" Mode="In" Type="String" />
+            <Parameter Name="FECHA_CREADO" Mode="In" Type="DateTime" />
+            <Parameter Name="ACCION" Mode="In" Type="String" />
+            <Parameter Name="CONDICION" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CLIENTES">
+            <Parameter Name="ID_CLIENTE" Mode="In" Type="Int32" />
+            <Parameter Name="NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="ID_TIPO_IDENTIFICACION" Mode="In" Type="Int32" />
+            <Parameter Name="NUMERO_IDENTIFICACION" Mode="In" Type="String" />
+            <Parameter Name="DIRECCION" Mode="In" Type="String" />
+            <Parameter Name="TELEFONO" Mode="In" Type="String" />
+            <Parameter Name="CELULAR" Mode="In" Type="String" />
+            <Parameter Name="EMAIL" Mode="In" Type="String" />
+            <Parameter Name="ESTADO" Mode="In" Type="String" />
+            <Parameter Name="LIMITE_CREDITO" Mode="In" Type="Decimal" />
+            <Parameter Name="CREADO_POR" Mode="In" Type="String" />
+            <Parameter Name="FECHA_CREADO" Mode="In" Type="DateTime" />
+            <Parameter Name="ACCION" Mode="In" Type="String" />
+            <Parameter Name="CONDICION" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_COBRADORES">
+            <Parameter Name="ID_COBRADOR" Mode="In" Type="Int32" />
+            <Parameter Name="NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="ID_TIPO_IDENTIFICACION" Mode="In" Type="Int32" />
+            <Parameter Name="NUMERO_IDENTIFICACION" Mode="In" Type="String" />
+            <Parameter Name="ESTADO" Mode="In" Type="String" />
+            <Parameter Name="SEXO" Mode="In" Type="String" />
+            <Parameter Name="CREADO_POR" Mode="In" Type="String" />
+            <Parameter Name="FECHA_CREADO" Mode="In" Type="DateTime" />
+            <Parameter Name="ACCION" Mode="In" Type="String" />
+            <Parameter Name="CONDICION" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_EMPRESA" ReturnType="Collection(BD_JSYSModel.SP_EMPRESA_Result)">
+            <Parameter Name="ID_EMPRESA" Mode="In" Type="Int32" />
+            <Parameter Name="EMPRESA" Mode="In" Type="String" />
+            <Parameter Name="DIRECCION" Mode="In" Type="String" />
+            <Parameter Name="ID_TIPO_IDENTIFICACION" Mode="In" Type="Int32" />
+            <Parameter Name="NUMERO_IDENTIFICACION" Mode="In" Type="String" />
+            <Parameter Name="TELEFONO" Mode="In" Type="String" />
+            <Parameter Name="CELULAR" Mode="In" Type="String" />
+            <Parameter Name="FAX" Mode="In" Type="String" />
+            <Parameter Name="EMAIL" Mode="In" Type="String" />
+            <Parameter Name="PAGINA_WEB" Mode="In" Type="String" />
+            <Parameter Name="ESLOGAN" Mode="In" Type="String" />
+            <Parameter Name="ITBIS" Mode="In" Type="Int32" />
+            <Parameter Name="IMPRESORA" Mode="In" Type="String" />
+            <Parameter Name="LOGO" Mode="In" Type="Binary" />
+            <Parameter Name="ACCION" Mode="In" Type="String" />
+            <Parameter Name="CONDICION" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_FACTURAS">
+            <Parameter Name="ID_FACTURA" Mode="In" Type="Int32" />
+            <Parameter Name="NUMERO_CONTRATO" Mode="In" Type="Int32" />
+            <Parameter Name="FECHA" Mode="In" Type="DateTime" />
+            <Parameter Name="ID_CLIENTE" Mode="In" Type="Int32" />
+            <Parameter Name="ID_COBRADOR" Mode="In" Type="Int32" />
+            <Parameter Name="ID_VENDEDOR" Mode="In" Type="Int32" />
+            <Parameter Name="NUMERO_LOTERIA" Mode="In" Type="String" />
+            <Parameter Name="NUMERO_CUOTAS" Mode="In" Type="Int32" />
+            <Parameter Name="MONTO_TOTAL" Mode="In" Type="Decimal" />
+            <Parameter Name="MONTO_PAGADO" Mode="In" Type="Decimal" />
+            <Parameter Name="MONTO_PENDIENTE" Mode="In" Type="Decimal" />
+            <Parameter Name="ENTREGADA" Mode="In" Type="String" />
+            <Parameter Name="FECHA_ENTREGA" Mode="In" Type="String" />
+            <Parameter Name="RUTA_COBRADOR" Mode="In" Type="String" />
+            <Parameter Name="ESTADO" Mode="In" Type="String" />
+            <Parameter Name="OBSERVACION" Mode="In" Type="String" />
+            <Parameter Name="CREADO_POR" Mode="In" Type="String" />
+            <Parameter Name="FECHA_CREADO" Mode="In" Type="DateTime" />
+            <Parameter Name="ACCION" Mode="In" Type="String" />
+            <Parameter Name="CONDICION" Mode="In" Type="String" />
+            <Parameter Name="ID_FACTURA_DETALLE" Mode="In" Type="Int32" />
+            <Parameter Name="ID_ARTICULO_DETALLE" Mode="In" Type="Int32" />
+            <Parameter Name="CANTIDAD_DETALLE" Mode="In" Type="Int32" />
+            <Parameter Name="PRECIO_DETALLE" Mode="In" Type="Decimal" />
+            <Parameter Name="MONTO_ITBIS_DETALLE" Mode="In" Type="Decimal" />
+            <Parameter Name="SUB_TOTAL_DETALLE" Mode="In" Type="Decimal" />
+            <Parameter Name="MONTO_TOTAL_DETALLE" Mode="In" Type="Decimal" />
+            <Parameter Name="ENTREGADO_DETALLE" Mode="In" Type="String" />
+            <Parameter Name="ID_FACTURA_CUOTA" Mode="In" Type="Int32" />
+            <Parameter Name="NUMERO_CUOTA" Mode="In" Type="Int32" />
+            <Parameter Name="FECHA_CUOTA" Mode="In" Type="DateTime" />
+            <Parameter Name="MONTO_CUOTA" Mode="In" Type="Decimal" />
+            <Parameter Name="MONTO_PAGADO_CUOTA" Mode="In" Type="Decimal" />
+            <Parameter Name="MONTO_PENDIENTE_CUOTA" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_LLENAR_COMBOBOX">
+            <Parameter Name="TABLA" Mode="In" Type="String" />
+            <Parameter Name="VALOR_MOSTRAR" Mode="In" Type="String" />
+            <Parameter Name="VALOR_CODIGO" Mode="In" Type="String" />
+            <Parameter Name="CONDICION" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_USUARIOS">
+            <Parameter Name="ID_USUARIO" Mode="In" Type="Int32" />
+            <Parameter Name="USUARIO" Mode="In" Type="String" />
+            <Parameter Name="CLAVE" Mode="In" Type="String" />
+            <Parameter Name="NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="ESTADO" Mode="In" Type="String" />
+            <Parameter Name="SEXO" Mode="In" Type="String" />
+            <Parameter Name="CREADO_POR" Mode="In" Type="String" />
+            <Parameter Name="FECHA_CREADO" Mode="In" Type="DateTime" />
+            <Parameter Name="ACCION" Mode="In" Type="String" />
+            <Parameter Name="CONDICION" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_VENDEDORES">
+            <Parameter Name="ID_VENDEDOR" Mode="In" Type="Int32" />
+            <Parameter Name="NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="ID_TIPO_IDENTIFICACION" Mode="In" Type="Int32" />
+            <Parameter Name="NUMERO_IDENTIFICACION" Mode="In" Type="String" />
+            <Parameter Name="ESTADO" Mode="In" Type="String" />
+            <Parameter Name="SEXO" Mode="In" Type="String" />
+            <Parameter Name="CREADO_POR" Mode="In" Type="String" />
+            <Parameter Name="FECHA_CREADO" Mode="In" Type="DateTime" />
+            <Parameter Name="ACCION" Mode="In" Type="String" />
+            <Parameter Name="CONDICION" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="CLIENTES" EntityType="BD_JSYSModel.CLIENTES" />
+          <EntitySet Name="CUADRES_DIARIOS" EntityType="BD_JSYSModel.CUADRES_DIARIOS" />
+          <EntitySet Name="DETALLES_CUOTAS" EntityType="BD_JSYSModel.DETALLES_CUOTAS" />
+          <EntitySet Name="EMPRESA" EntityType="BD_JSYSModel.EMPRESA" />
+          <EntitySet Name="ENCABEZADO_CUOTAS" EntityType="BD_JSYSModel.ENCABEZADO_CUOTAS" />
+          <EntitySet Name="ESTADO_FACTURAS" EntityType="BD_JSYSModel.ESTADO_FACTURAS" />
+          <EntitySet Name="FACTURAS" EntityType="BD_JSYSModel.FACTURAS" />
+          <EntitySet Name="PANTALLAS" EntityType="BD_JSYSModel.PANTALLAS" />
+          <EntitySet Name="PERMISOS" EntityType="BD_JSYSModel.PERMISOS" />
+          <EntitySet Name="RECIBOS_COBRADOS" EntityType="BD_JSYSModel.RECIBOS_COBRADOS" />
+          <EntitySet Name="sysdiagrams" EntityType="BD_JSYSModel.sysdiagrams" />
+          <EntitySet Name="TIPOS_IDENTIFICACIONES" EntityType="BD_JSYSModel.TIPOS_IDENTIFICACIONES" />
+          <EntitySet Name="USUARIOS" EntityType="BD_JSYSModel.USUARIOS" />
+          </EntityContainer>
+        <ComplexType Name="SP_EMPRESA_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="EMPRESA" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="DIRECCION" Nullable="false" MaxLength="500" />
+          <Property Type="Int32" Name="ID_TIPO_IDENTIFICACION" Nullable="false" />
+          <Property Type="String" Name="NUMERO_IDENTIFICACION" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TELEFONO" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CELULAR" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="FAX" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="EMAIL" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PAGINA_WEB" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ESLOGAN" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="ITBIS" Nullable="false" />
+          <Property Type="String" Name="IMPRESORA" Nullable="true" MaxLength="100" />
+          <Property Type="Binary" Name="LOGO" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <EntityType Name="CLIENTES">
+          <Key>
+            <PropertyRef Name="REFERENCIA" />
+          </Key>
+          <Property Name="REFERENCIA" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ID_TIPO_IDENTIFICACION" Type="Int32" Nullable="false" />
+          <Property Name="NUMERO_IDENTIFICACION" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="DIRECCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TELEFONO" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CELULAR" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SUELDO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ESTADO" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="CREADO_POR" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA_CREADO" Type="DateTime" Precision="3" />
+          <Property Name="DIRECCION_TRABAJO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRE_CONYUGUE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TELEFONO_CONYUGUE" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CASA_PROPIA" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRE_REFERENCIA1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DIRECCION_REFERENCIA1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TELEFONO_REFERENCIA1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="OBSERVACION_REFERENCIA1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRE_REFERENCIA2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DIRECCION_REFERENCIA2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TELEFONO_REFERENCIA2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="OBSERVACION_REFERENCIA2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OBSERVACION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CUADRES_DIARIOS">
+          <Key>
+            <PropertyRef Name="FECHA" />
+          </Key>
+          <Property Name="FECHA" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="VALOR_PAGADO" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VALOR_ANULADO" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VALOR_TOTAL" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VALOR_DESCUENTO" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="DETALLES_CUOTAS">
+          <Key>
+            <PropertyRef Name="ID_FACTURA" />
+            <PropertyRef Name="NUMERO_CUOTA" />
+            <PropertyRef Name="FECHA" />
+            <PropertyRef Name="MONTO_CUOTA" />
+          </Key>
+          <Property Name="ID_FACTURA" Type="Int32" Nullable="false" />
+          <Property Name="NUMERO_CUOTA" Type="Int32" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MONTO_CUOTA" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MONTO_PAGADO" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MONTO_PENDIENTE" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="RE_CALCULADO" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="ID_EMPRESA" />
+          </Key>
+          <Property Name="ID_EMPRESA" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECCION" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ID_TIPO_IDENTIFICACION" Type="Int32" Nullable="false" />
+          <Property Name="NUMERO_IDENTIFICACION" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CELULAR" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FAX" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PAGINA_WEB" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ESLOGAN" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IMPRESORA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LOGO" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ENCABEZADO_CUOTAS">
+          <Key>
+            <PropertyRef Name="ID_FACTURA" />
+          </Key>
+          <Property Name="ID_FACTURA" Type="Int32" Nullable="false" />
+          <Property Name="MODO_CALCULO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CANTIADA_CUOTA" Type="Int32" Nullable="false" />
+          <Property Name="FECHA_PRIMERA_CUOTA" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="ESTADO_FACTURAS">
+          <Key>
+            <PropertyRef Name="ID_ESTADO" />
+          </Key>
+          <Property Name="ID_ESTADO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FACTURAS">
+          <Key>
+            <PropertyRef Name="ID_FACTURA" />
+          </Key>
+          <Property Name="ID_FACTURA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="REFERENCIA" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ID_COBRADOR" Type="Int32" Nullable="false" />
+          <Property Name="NUMERO_LOTERIA" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="MONTO_TOTAL" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MONTO_PAGADO" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MONTO_PENDIENTE" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ID_ESTADO" Type="Int32" Nullable="false" />
+          <Property Name="OBSERVACION" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="CREADO_POR" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_CREADO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CAMBIO_ESTADO_POR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_CAMBIO_ESTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOTA_CAMBIO_ESTADO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="GARANTIA1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="GARANTIA2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="GARANTIA3" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="GARANTIA4" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="GARANTIA5" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="GARANTIA6" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="GARANTIA7" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="MONTO_DESCONTADO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RUTA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_DESCUENTO" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="PANTALLAS">
+          <Key>
+            <PropertyRef Name="PANTALLA" />
+          </Key>
+          <Property Name="PANTALLA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACCESO" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERMISOS">
+          <Key>
+            <PropertyRef Name="USUARIO" />
+            <PropertyRef Name="PANTALLA" />
+          </Key>
+          <Property Name="USUARIO" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PANTALLA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACCESO" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RECIBOS_COBRADOS">
+          <Key>
+            <PropertyRef Name="ID_RECIBO" />
+          </Key>
+          <Property Name="ID_RECIBO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_FACTURA" Type="Int32" Nullable="false" />
+          <Property Name="CUOTA_COBRADA" Type="Int32" Nullable="false" />
+          <Property Name="VALOR_CUOTA" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VALOR_PAGADO" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VALOR_PENDIENTE" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ESTADO" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="FECHA_CREADO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CREADO_POR" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CANTIDAD_CUOTAS" Type="Int32" Nullable="false" />
+          <Property Name="ANULADO_POR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_ANULADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOTA_ANULACION" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TIPOS_IDENTIFICACIONES">
+          <Key>
+            <PropertyRef Name="ID_TIPO_IDENTIFICACION" />
+          </Key>
+          <Property Name="ID_TIPO_IDENTIFICACION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CLAVE" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="SEXO" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ESTADO" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="CREADO_POR" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_CREADO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TIPO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BD_JSYSModelStoreContainer" CdmEntityContainer="BD_JSYSEntities">
+          <FunctionImportMapping FunctionImportName="SP_LLENAR_COMBOBOX" FunctionName="BD_JSYSModel.Store.SP_LLENAR_COMBOBOX" />
+          <EntitySetMapping Name="CLIENTES">
+            <EntityTypeMapping TypeName="BD_JSYSModel.CLIENTES">
+              <MappingFragment StoreEntitySet="CLIENTES">
+                <ScalarProperty Name="OBSERVACION" ColumnName="OBSERVACION" />
+                <ScalarProperty Name="OBSERVACION_REFERENCIA2" ColumnName="OBSERVACION_REFERENCIA2" />
+                <ScalarProperty Name="TELEFONO_REFERENCIA2" ColumnName="TELEFONO_REFERENCIA2" />
+                <ScalarProperty Name="DIRECCION_REFERENCIA2" ColumnName="DIRECCION_REFERENCIA2" />
+                <ScalarProperty Name="NOMBRE_REFERENCIA2" ColumnName="NOMBRE_REFERENCIA2" />
+                <ScalarProperty Name="OBSERVACION_REFERENCIA1" ColumnName="OBSERVACION_REFERENCIA1" />
+                <ScalarProperty Name="TELEFONO_REFERENCIA1" ColumnName="TELEFONO_REFERENCIA1" />
+                <ScalarProperty Name="DIRECCION_REFERENCIA1" ColumnName="DIRECCION_REFERENCIA1" />
+                <ScalarProperty Name="NOMBRE_REFERENCIA1" ColumnName="NOMBRE_REFERENCIA1" />
+                <ScalarProperty Name="CASA_PROPIA" ColumnName="CASA_PROPIA" />
+                <ScalarProperty Name="TELEFONO_CONYUGUE" ColumnName="TELEFONO_CONYUGUE" />
+                <ScalarProperty Name="NOMBRE_CONYUGUE" ColumnName="NOMBRE_CONYUGUE" />
+                <ScalarProperty Name="DIRECCION_TRABAJO" ColumnName="DIRECCION_TRABAJO" />
+                <ScalarProperty Name="FECHA_CREADO" ColumnName="FECHA_CREADO" />
+                <ScalarProperty Name="CREADO_POR" ColumnName="CREADO_POR" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="SUELDO" ColumnName="SUELDO" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="CELULAR" ColumnName="CELULAR" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="NUMERO_IDENTIFICACION" ColumnName="NUMERO_IDENTIFICACION" />
+                <ScalarProperty Name="ID_TIPO_IDENTIFICACION" ColumnName="ID_TIPO_IDENTIFICACION" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="REFERENCIA" ColumnName="REFERENCIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUADRES_DIARIOS">
+            <EntityTypeMapping TypeName="BD_JSYSModel.CUADRES_DIARIOS">
+              <MappingFragment StoreEntitySet="CUADRES_DIARIOS">
+                <ScalarProperty Name="VALOR_DESCUENTO" ColumnName="VALOR_DESCUENTO" />
+                <ScalarProperty Name="VALOR_TOTAL" ColumnName="VALOR_TOTAL" />
+                <ScalarProperty Name="VALOR_ANULADO" ColumnName="VALOR_ANULADO" />
+                <ScalarProperty Name="VALOR_PAGADO" ColumnName="VALOR_PAGADO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLES_CUOTAS">
+            <EntityTypeMapping TypeName="BD_JSYSModel.DETALLES_CUOTAS">
+              <MappingFragment StoreEntitySet="DETALLES_CUOTAS">
+                <ScalarProperty Name="RE_CALCULADO" ColumnName="RE_CALCULADO" />
+                <ScalarProperty Name="MONTO_PENDIENTE" ColumnName="MONTO_PENDIENTE" />
+                <ScalarProperty Name="MONTO_PAGADO" ColumnName="MONTO_PAGADO" />
+                <ScalarProperty Name="MONTO_CUOTA" ColumnName="MONTO_CUOTA" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="NUMERO_CUOTA" ColumnName="NUMERO_CUOTA" />
+                <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPRESA">
+            <EntityTypeMapping TypeName="BD_JSYSModel.EMPRESA">
+              <MappingFragment StoreEntitySet="EMPRESA">
+                <ScalarProperty Name="LOGO" ColumnName="LOGO" />
+                <ScalarProperty Name="IMPRESORA" ColumnName="IMPRESORA" />
+                <ScalarProperty Name="ESLOGAN" ColumnName="ESLOGAN" />
+                <ScalarProperty Name="PAGINA_WEB" ColumnName="PAGINA_WEB" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="FAX" ColumnName="FAX" />
+                <ScalarProperty Name="CELULAR" ColumnName="CELULAR" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="NUMERO_IDENTIFICACION" ColumnName="NUMERO_IDENTIFICACION" />
+                <ScalarProperty Name="ID_TIPO_IDENTIFICACION" ColumnName="ID_TIPO_IDENTIFICACION" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ENCABEZADO_CUOTAS">
+            <EntityTypeMapping TypeName="BD_JSYSModel.ENCABEZADO_CUOTAS">
+              <MappingFragment StoreEntitySet="ENCABEZADO_CUOTAS">
+                <ScalarProperty Name="FECHA_PRIMERA_CUOTA" ColumnName="FECHA_PRIMERA_CUOTA" />
+                <ScalarProperty Name="CANTIADA_CUOTA" ColumnName="CANTIADA_CUOTA" />
+                <ScalarProperty Name="MODO_CALCULO" ColumnName="MODO_CALCULO" />
+                <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADO_FACTURAS">
+            <EntityTypeMapping TypeName="BD_JSYSModel.ESTADO_FACTURAS">
+              <MappingFragment StoreEntitySet="ESTADO_FACTURAS">
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID_ESTADO" ColumnName="ID_ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACTURAS">
+            <EntityTypeMapping TypeName="BD_JSYSModel.FACTURAS">
+              <MappingFragment StoreEntitySet="FACTURAS">
+                <ScalarProperty Name="FECHA_DESCUENTO" ColumnName="FECHA_DESCUENTO" />
+                <ScalarProperty Name="RUTA" ColumnName="RUTA" />
+                <ScalarProperty Name="MONTO_DESCONTADO" ColumnName="MONTO_DESCONTADO" />
+                <ScalarProperty Name="GARANTIA7" ColumnName="GARANTIA7" />
+                <ScalarProperty Name="GARANTIA6" ColumnName="GARANTIA6" />
+                <ScalarProperty Name="GARANTIA5" ColumnName="GARANTIA5" />
+                <ScalarProperty Name="GARANTIA4" ColumnName="GARANTIA4" />
+                <ScalarProperty Name="GARANTIA3" ColumnName="GARANTIA3" />
+                <ScalarProperty Name="GARANTIA2" ColumnName="GARANTIA2" />
+                <ScalarProperty Name="GARANTIA1" ColumnName="GARANTIA1" />
+                <ScalarProperty Name="NOTA_CAMBIO_ESTADO" ColumnName="NOTA_CAMBIO_ESTADO" />
+                <ScalarProperty Name="FECHA_CAMBIO_ESTADO" ColumnName="FECHA_CAMBIO_ESTADO" />
+                <ScalarProperty Name="CAMBIO_ESTADO_POR" ColumnName="CAMBIO_ESTADO_POR" />
+                <ScalarProperty Name="FECHA_CREADO" ColumnName="FECHA_CREADO" />
+                <ScalarProperty Name="CREADO_POR" ColumnName="CREADO_POR" />
+                <ScalarProperty Name="OBSERVACION" ColumnName="OBSERVACION" />
+                <ScalarProperty Name="ID_ESTADO" ColumnName="ID_ESTADO" />
+                <ScalarProperty Name="MONTO_PENDIENTE" ColumnName="MONTO_PENDIENTE" />
+                <ScalarProperty Name="MONTO_PAGADO" ColumnName="MONTO_PAGADO" />
+                <ScalarProperty Name="MONTO_TOTAL" ColumnName="MONTO_TOTAL" />
+                <ScalarProperty Name="NUMERO_LOTERIA" ColumnName="NUMERO_LOTERIA" />
+                <ScalarProperty Name="ID_COBRADOR" ColumnName="ID_COBRADOR" />
+                <ScalarProperty Name="REFERENCIA" ColumnName="REFERENCIA" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PANTALLAS">
+            <EntityTypeMapping TypeName="BD_JSYSModel.PANTALLAS">
+              <MappingFragment StoreEntitySet="PANTALLAS">
+                <ScalarProperty Name="ACCESO" ColumnName="ACCESO" />
+                <ScalarProperty Name="PANTALLA" ColumnName="PANTALLA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERMISOS">
+            <EntityTypeMapping TypeName="BD_JSYSModel.PERMISOS">
+              <MappingFragment StoreEntitySet="PERMISOS">
+                <ScalarProperty Name="ACCESO" ColumnName="ACCESO" />
+                <ScalarProperty Name="PANTALLA" ColumnName="PANTALLA" />
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RECIBOS_COBRADOS">
+            <EntityTypeMapping TypeName="BD_JSYSModel.RECIBOS_COBRADOS">
+              <MappingFragment StoreEntitySet="RECIBOS_COBRADOS">
+                <ScalarProperty Name="NOTA_ANULACION" ColumnName="NOTA_ANULACION" />
+                <ScalarProperty Name="FECHA_ANULADO" ColumnName="FECHA_ANULADO" />
+                <ScalarProperty Name="ANULADO_POR" ColumnName="ANULADO_POR" />
+                <ScalarProperty Name="CANTIDAD_CUOTAS" ColumnName="CANTIDAD_CUOTAS" />
+                <ScalarProperty Name="CREADO_POR" ColumnName="CREADO_POR" />
+                <ScalarProperty Name="FECHA_CREADO" ColumnName="FECHA_CREADO" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="VALOR_PENDIENTE" ColumnName="VALOR_PENDIENTE" />
+                <ScalarProperty Name="VALOR_PAGADO" ColumnName="VALOR_PAGADO" />
+                <ScalarProperty Name="VALOR_CUOTA" ColumnName="VALOR_CUOTA" />
+                <ScalarProperty Name="CUOTA_COBRADA" ColumnName="CUOTA_COBRADA" />
+                <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
+                <ScalarProperty Name="ID_RECIBO" ColumnName="ID_RECIBO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BD_JSYSModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPOS_IDENTIFICACIONES">
+            <EntityTypeMapping TypeName="BD_JSYSModel.TIPOS_IDENTIFICACIONES">
+              <MappingFragment StoreEntitySet="TIPOS_IDENTIFICACIONES">
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID_TIPO_IDENTIFICACION" ColumnName="ID_TIPO_IDENTIFICACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOS">
+            <EntityTypeMapping TypeName="BD_JSYSModel.USUARIOS">
+              <MappingFragment StoreEntitySet="USUARIOS">
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="FECHA_CREADO" ColumnName="FECHA_CREADO" />
+                <ScalarProperty Name="CREADO_POR" ColumnName="CREADO_POR" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="SEXO" ColumnName="SEXO" />
+                <ScalarProperty Name="CLAVE" ColumnName="CLAVE" />
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c51db26c0b4946a2ae8720837e62da83" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="BD_JSYSModel.CLIENTES" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BD_JSYSModel.CUADRES_DIARIOS" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BD_JSYSModel.DETALLES_CUOTAS" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BD_JSYSModel.EMPRESA" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BD_JSYSModel.ENCABEZADO_CUOTAS" Width="1.5" PointX="4.75" PointY="5.75" />
+        <EntityTypeShape EntityType="BD_JSYSModel.ESTADO_FACTURAS" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BD_JSYSModel.FACTURAS" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BD_JSYSModel.PANTALLAS" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="BD_JSYSModel.PERMISOS" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BD_JSYSModel.RECIBOS_COBRADOS" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="BD_JSYSModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BD_JSYSModel.TIPOS_IDENTIFICACIONES" Width="1.5" PointX="8.75" PointY="6.75" />
+        <EntityTypeShape EntityType="BD_JSYSModel.USUARIOS" Width="1.5" PointX="8.75" PointY="9.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
